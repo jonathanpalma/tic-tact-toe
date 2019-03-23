@@ -1,0 +1,38 @@
+{
+  "name": "tic-tac-toe-ui",
+  "version": "0.0.1",
+  "description": "Tic tac toe using NodeJS and ReactJS",
+  "keywords": [
+    "tic tac toe",
+    "react",
+    "node"
+  ],
+  "dependencies": {
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-scripts": "2.1.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathanpalma/tic-tac-toe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonathanpalma/tic-tac-toe/issues"
+  },
+  "author": "Jonathan Palma <tanpalma04@gmail.com> (http://jonathanpalma.me)",
+  "license": "MIT"
+}
