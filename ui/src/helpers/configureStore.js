@@ -1,5 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
 import reducers from 'reducers';
 import throttle from 'lodash/throttle';
 import { loadState, saveState } from 'helpers/localStorage';
@@ -9,8 +10,12 @@ const composeEnhancers =
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     : compose;
 
+const sagaMiddleware = createSagaMiddleware();
+
 const middlewares =
-  process.env.NODE_ENV !== 'production' ? [createLogger({})] : [];
+  process.env.NODE_ENV !== 'production'
+    ? [sagaMiddleware, createLogger({})]
+    : [sagaMiddleware];
 
 const configureStore = (initialState = loadState()) => {
   const store = createStore(
@@ -18,6 +23,8 @@ const configureStore = (initialState = loadState()) => {
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
   );
+
+  // sagaMiddleware.run(myAwesomeSaga);
 
   store.subscribe(
     throttle(() => {
