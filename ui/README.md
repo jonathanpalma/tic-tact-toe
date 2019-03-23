@@ -53,7 +53,7 @@ The `helpers` folder contains all the bits and pieces that don't fit into other 
 
 ### images
 
-The `helpers` folder contains all the image assets that can be imported from js and be used anywhere in the application.
+The `images` folder contains all the image assets that can be imported from js and be used anywhere in the application.
 
 ### reducers
 
