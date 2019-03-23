@@ -2,7 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import reducers from 'reducers';
 import throttle from 'lodash/throttle';
-import { loadState, saveState } from './localStorage';
+import { loadState, saveState } from 'helpers/localStorage';
 
 const composeEnhancers =
   process.env.NODE_ENV !== 'production'
