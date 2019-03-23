@@ -18,4 +18,3 @@ export const saveState = state => {
     // TODO: Handle errors here
   }
 };
-

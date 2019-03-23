@@ -1,8 +1,8 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import reducers from 'reducers';
-import { loadState, saveState } from './localStorage';
 import throttle from 'lodash/throttle';
+import { loadState, saveState } from './localStorage';
 
 const composeEnhancers =
   process.env.NODE_ENV !== 'production'
@@ -10,9 +10,7 @@ const composeEnhancers =
     : compose;
 
 const middlewares =
-  process.env.NODE_ENV !== 'production'
-    ? [createLogger({})]
-    : [];
+  process.env.NODE_ENV !== 'production' ? [createLogger({})] : [];
 
 const configureStore = (initialState = loadState()) => {
   const store = createStore(
@@ -21,9 +19,12 @@ const configureStore = (initialState = loadState()) => {
     composeEnhancers(applyMiddleware(...middlewares))
   );
 
-  store.subscribe(throttle(() => {
-    saveState(store.getState());
-  }), 1000);
+  store.subscribe(
+    throttle(() => {
+      saveState(store.getState());
+    }),
+    1000
+  );
 
   return store;
 };

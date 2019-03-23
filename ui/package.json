@@ -20,6 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint ./src/**/*.js --fix",
     "test": "react-scripts test"
   },
   "eslintConfig": {
@@ -39,5 +40,14 @@
     "url": "https://github.com/jonathanpalma/tic-tac-toe/issues"
   },
   "author": "Jonathan Palma <tanpalma04@gmail.com> (http://jonathanpalma.me)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.16.4"
+  }
 }
