@@ -5,6 +5,14 @@ const commons = {
   keys: {
     mongoURI: process.env.MONGO_URI,
   },
+  mongooseOptions: {
+    autoReconnect: true,
+    bufferMaxEntries: false,
+    connectTimeoutMS: 5000,
+    reconnectInterval: 5000,
+    reconnectTries: 5,
+    useNewUrlParser: true,
+  },
   port: 3001,
 };
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const config = require('./config');
 const logger = require('./helpers/logger');
 const errorLogger = require('./middlewares/errorLogger');
@@ -23,12 +24,43 @@ app.use(requestLogger(logger));
 app.use('/scores', scoreRouter);
 app.use('/users', userRouter);
 
+// database
+const db = mongoose.connection;
+let connectionRetries = 1;
+let reconnectionTimeout;
+
+const { keys, mongooseOptions } = config;
+const connectMongoose = () => {
+  try {
+    clearTimeout(reconnectionTimeout);
+    mongoose.connect(keys.mongoURI, mongooseOptions).then(
+      () => {},
+      err => {
+        logger.error(`${connectionRetries} - Mongodb connection rejected. Retrying in 5 sec.`, err);
+        connectionRetries += 1;
+        mongoose.disconnect();
+        reconnectionTimeout = setTimeout(connectMongoose, 5000);
+      }
+    );
+  } catch (err) {
+    logger.error('Error trying to connect to mongodb', err);
+  }
+};
+
+connectMongoose();
+
+db.once('open', () => {
+  logger.info('Mongodb connection open...');
+});
+
 const PORT = process.env.PORT || config.port;
 app.listen(PORT, () => {
   logger.info(`Started on port ${PORT}`);
 });
 
 process.on('SIGINT', () => {
-  logger.info('Server shutting down');
-  process.exit();
+  db.close(() => {
+    logger.info('Mongoose default connection disconnected through app termination');
+    process.exit();
+  });
 });
