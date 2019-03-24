@@ -1,3 +1,5 @@
+const development = require('./development');
+const production = require('./production');
 require('dotenv').config();
 
 const commons = {
@@ -23,20 +25,9 @@ const commons = {
 };
 
 const config =
+  // eslint-disable-next-line prettier/prettier
   process.env.NODE_ENV !== 'production'
-    ? Object.assign(commons, {
-        loggerOptions: Object.assign(commons.loggerOptions, {
-          prettyPrint: true,
-          humanReadableUnhandledException: true,
-          colorize: true,
-        }),
-      })
-    : Object.assign(commons, {
-        loggerOptions: Object.assign(commons.loggerOptions, {
-          prettyPrint: false,
-          humanReadableUnhandledException: false,
-          colorize: false,
-        }),
-      });
+    ? development(commons)
+    : production(commons);
 
 module.exports = Object.freeze(Object.assign({}, config));
