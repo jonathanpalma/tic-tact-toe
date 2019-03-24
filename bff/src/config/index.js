@@ -1,5 +1,10 @@
+require('dotenv').config();
+
 const commons = {
   env: process.env.NODE_ENV,
+  keys: {
+    mongoURI: process.env.MONGO_URI,
+  },
   port: 3001,
 };
 
