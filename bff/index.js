@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const config = require('./config');
 const logger = require('./helpers/logger');
-
+const errorLogger = require('./middlewares/errorLogger');
+const requestLogger = require('./middlewares/requestLogger');
 const scoreRouter = require('./routes/scoreRouter');
 const userRouter = require('./routes/userRouter');
 
@@ -13,6 +14,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+
+// logger
+app.use(errorLogger(logger));
+app.use(requestLogger(logger));
 
 // routes
 app.use('/scores', scoreRouter);
