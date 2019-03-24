@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const config = require('./config');
+const logger = require('./helpers/logger');
 
 const scoreRouter = require('./routes/scoreRouter');
 const userRouter = require('./routes/userRouter');
@@ -16,5 +18,12 @@ app.use(cors());
 app.use('/scores', scoreRouter);
 app.use('/users', userRouter);
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT);
+const PORT = process.env.PORT || config.port;
+app.listen(PORT, () => {
+  logger.info(`Started on port ${PORT}`);
+});
+
+process.on('SIGINT', () => {
+  logger.info('Server shutting down');
+  process.exit();
+});

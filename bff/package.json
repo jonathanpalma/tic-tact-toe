@@ -4,7 +4,7 @@
   "description": "Backend for Frontend",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint index.js routes/**.js --config .eslintrc.json --fix",
     "start": "cross-env NODE_ENV=production node index.js"
   },
@@ -24,7 +24,8 @@
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.19",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^5.3.0",
