@@ -1,0 +1,27 @@
+{
+  "name": "tic-tac-toe-bff",
+  "version": "0.0.1",
+  "description": "Backend for Frontend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "cross-env NODE_ENV=production node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathanpalma/tic-tac-toe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonathanpalma/tic-tac-toe/issues"
+  },
+  "author": "Jonathan Palma <tanpalma04@gmail.com> (http://jonathanpalma.me)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10"
+  }
+}
