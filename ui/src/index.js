@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import App from 'components/App';
+import HomePage from 'components/HomePage';
+import NotFound from 'components/NotFound';
+import RankingPage from 'components/RankingPage';
 import Root from 'components/Root';
 import './index.css';
 
@@ -14,7 +18,15 @@ if (NODE_ENV !== 'production') {
 
 ReactDOM.render(
   <Root>
-    <App />
+    <Router>
+      <App>
+        <Switch>
+          <Route path="/ranking" component={RankingPage} />
+          <Route path="/" exact component={HomePage} />
+          <Route path="*" component={NotFound} status={404} />
+        </Switch>
+      </App>
+    </Router>
   </Root>,
   document.getElementById('root')
 );

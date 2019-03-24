@@ -1,15 +1,19 @@
 import React from 'react';
-import Log from 'helpers/Log';
+import PropTypes from 'prop-types';
+import Navbar from 'components/Navbar';
 
-const logger = new Log('App Component');
+const App = ({ children }) => (
+  <React.Fragment>
+    <Navbar />
+    {children}
+  </React.Fragment>
+);
 
-const App = () => {
-  logger.trace('I log some trace when I am not in production :)');
-  return (
-    <div>
-      <p>I will be an awesome tic tac toe :)</p>
-    </div>
-  );
+App.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default App;
