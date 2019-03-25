@@ -1,4 +1,5 @@
 const express = require('express');
+const { deleteUserById, getUserById, getUsers, postUser } = require('../controllers/userController');
 
 const router = express.Router({
   mergeParams: true,
@@ -6,23 +7,12 @@ const router = express.Router({
 
 router
   .route('/')
-  .get((req, res) => {
-    res.send([]);
-  })
-  .post((req, res) => {
-    res.send('user created');
-  });
+  .get(getUsers)
+  .post(postUser);
 
 router
   .route('/:id')
-  .delete((req, res) => {
-    res.send('user deleted');
-  })
-  .get((req, res) => {
-    res.send({});
-  })
-  .put((req, res) => {
-    res.send('user updated');
-  });
+  .delete(deleteUserById)
+  .get(getUserById);
 
 module.exports = router;
