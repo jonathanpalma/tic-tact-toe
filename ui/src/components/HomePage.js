@@ -1,5 +1,6 @@
 import React from 'react';
+import GameConfigMenu from './GameConfigMenu';
 
-const HomePage = () => <div>Home</div>;
+const HomePage = () => <GameConfigMenu />;
 
 export default HomePage;
