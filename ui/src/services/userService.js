@@ -21,13 +21,24 @@ const getUserById = async id => {
   } = config.api;
   const endpointWithPathVars = endpoint.replace(':userId', id);
   const url = `${baseUrl}${endpointWithPathVars}`;
-  const user = await axios.get(url);
-  return user;
+  const response = await axios.get(url);
+  return response;
+};
+
+const postUsers = async id => {
+  const {
+    baseUrl,
+    postUsers: { endpoint },
+  } = config.api;
+  const url = `${baseUrl}${endpoint}`;
+  const response = await axios.post(url, { id });
+  return response;
 };
 
 const userService = {
   getUsers,
   getUserById,
+  postUsers,
 };
 
 export default userService;

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import AsyncSelect from 'react-select/lib/Async';
+import AsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import debounce from 'debounce-promise';
 import Log from 'helpers/Log';
 import userService from 'services/userService';
@@ -23,14 +23,28 @@ const UserInput = memo(({ name, errorMsg, onChange, title }) => {
       return [];
     }
   };
+  const handleChange = async option => {
+    if (option) {
+      const { value } = option;
+      // eslint-disable-next-line no-underscore-dangle
+      if (option && option.__isNew__) {
+        const userRequest = await userService.postUsers(option.value);
+        if (userRequest.status === 201) {
+          onChange(value);
+        }
+      } else {
+        onChange(value);
+      }
+    }
+  };
   return (
     <div>
       <span>{title}</span>
-      <AsyncSelect
+      <AsyncCreatableSelect
         id={name}
         name={`userInput-${name}`}
         loadOptions={debounce(getOptions, 300)}
-        onChange={onChange}
+        onChange={handleChange}
         isClearable
       />
       {errorMsg && (
