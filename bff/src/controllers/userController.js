@@ -57,7 +57,11 @@ const deleteUserById = async (req, res) => {
 
 const getUsers = (req, res) => {
   try {
-    UserModel.find({}, (err, users) => {
+    const { filter, limit } = req.query;
+    const pattern = filter ? { id: { $regex: new RegExp(filter), $options: 'i' } } : {};
+    let q = UserModel.find(pattern);
+    q = !Number.isNaN(Number(limit)) ? q.limit(Number(limit)) : q;
+    q.exec((err, users) => {
       if (err) {
         logger.error(err);
         res.status(500).send(err);

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import UserInput from './UserInput';
 
 class GameConfigMenu extends PureComponent {
   constructor(props) {
@@ -9,11 +10,9 @@ class GameConfigMenu extends PureComponent {
   render() {
     return (
       <div id="game-config-menu">
-        <input type="text" name="player1" />
+        <UserInput name="player1" title="Player 1" />
         <br />
-        <input type="text" name="player2" />
-        <br />
-        <input type="text" name="boardSize" />
+        <UserInput name="player2" title="Player 2" />
         <br />
         <button type="button">Start</button>
       </div>
