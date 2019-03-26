@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import UserInput from 'components/UserInput';
 import gameConfigActions from 'actions/gameConfigActions';
 import {
   getBoardSize,
   getPlayer1,
   getPlayer2,
 } from 'selectors/gameConfigSelectors';
-import UserInput from './UserInput';
 
 const GameConfigMenu = memo(
   ({

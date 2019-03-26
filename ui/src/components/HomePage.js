@@ -1,5 +1,5 @@
 import React from 'react';
-import GameConfigMenu from './GameConfigMenu';
+import GameConfigMenu from 'containers/GameConfigMenu';
 
 const HomePage = () => <GameConfigMenu />;
 
