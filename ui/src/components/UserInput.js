@@ -7,7 +7,7 @@ import userService from 'services/userService';
 
 const logger = new Log('UserInput');
 
-const UserInput = memo(({ name, errorMsg, onChange, title }) => {
+const UserInput = memo(({ name, errorMsg, onChange, onClear, title }) => {
   const getOptions = async input => {
     if (!input || input.length < 3) {
       return [];
@@ -35,6 +35,8 @@ const UserInput = memo(({ name, errorMsg, onChange, title }) => {
       } else {
         onChange(value);
       }
+    } else {
+      onClear();
     }
   };
   return (
@@ -44,7 +46,7 @@ const UserInput = memo(({ name, errorMsg, onChange, title }) => {
         id={name}
         name={`userInput-${name}`}
         loadOptions={debounce(getOptions, 300)}
-        onChange={handleChange}
+        onChange={debounce(handleChange, 300)}
         isClearable
       />
       {errorMsg && (
@@ -57,12 +59,14 @@ const UserInput = memo(({ name, errorMsg, onChange, title }) => {
 UserInput.propTypes = {
   errorMsg: PropTypes.string,
   name: PropTypes.string.isRequired,
+  onClear: PropTypes.func,
   onChange: PropTypes.func,
   title: PropTypes.string.isRequired,
 };
 
 UserInput.defaultProps = {
   errorMsg: undefined,
+  onClear: () => {},
   onChange: value => logger.info(value),
 };
 
