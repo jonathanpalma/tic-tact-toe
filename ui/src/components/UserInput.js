@@ -7,67 +7,72 @@ import userService from 'services/userService';
 
 const logger = new Log('UserInput');
 
-const UserInput = memo(({ name, errorMsg, onChange, onClear, title }) => {
-  const getOptions = async input => {
-    if (!input || input.length < 3) {
-      return [];
-    }
-    try {
-      const requestParams = { filter: input, limit: 10 };
-      const usersRequest = await userService.getUsers(requestParams);
-      const users = usersRequest.data;
-      const options = users.map(user => ({ value: user.id, label: user.id }));
-      return options;
-    } catch (err) {
-      logger.error(err);
-      return [];
-    }
-  };
-  const handleChange = async option => {
-    if (option) {
-      const { value } = option;
-      // eslint-disable-next-line no-underscore-dangle
-      if (option && option.__isNew__) {
-        const userRequest = await userService.postUsers(option.value);
-        if (userRequest.status === 201) {
-          onChange(value);
+const UserInput = memo(
+  ({ errorMsg, name, onChange, onClear, title, value }) => {
+    const getOptions = async input => {
+      if (!input || input.length < 3) {
+        return [];
+      }
+      try {
+        const requestParams = { filter: input, limit: 10 };
+        const usersRequest = await userService.getUsers(requestParams);
+        const users = usersRequest.data;
+        const options = users.map(user => ({ value: user.id, label: user.id }));
+        return options;
+      } catch (err) {
+        logger.error(err);
+        return [];
+      }
+    };
+    const handleChange = async option => {
+      if (option) {
+        const { value: optionValue } = option;
+        // eslint-disable-next-line no-underscore-dangle
+        if (option.__isNew__) {
+          const userRequest = await userService.postUsers(optionValue);
+          if (userRequest.status === 201) {
+            onChange(optionValue);
+          }
+        } else {
+          onChange(optionValue);
         }
       } else {
-        onChange(value);
+        onClear();
       }
-    } else {
-      onClear();
-    }
-  };
-  return (
-    <div>
-      <span>{title}</span>
-      <AsyncCreatableSelect
-        id={name}
-        name={`userInput-${name}`}
-        loadOptions={debounce(getOptions, 300)}
-        onChange={debounce(handleChange, 300)}
-        isClearable
-      />
-      {errorMsg && (
-        <div className="alert alert-danger">{`Error: ${errorMsg}`}</div>
-      )}
-    </div>
-  );
-});
+    };
+    return (
+      <div>
+        <span>{title}</span>
+        <AsyncCreatableSelect
+          id={name}
+          isClearable
+          loadOptions={debounce(getOptions, 300)}
+          name={`userInput-${name}`}
+          onChange={debounce(handleChange, 300)}
+          value={{ label: value, value }}
+        />
+        {errorMsg && (
+          <div className="alert alert-danger">{`Error: ${errorMsg}`}</div>
+        )}
+      </div>
+    );
+  }
+);
 
 UserInput.propTypes = {
   errorMsg: PropTypes.string,
   name: PropTypes.string.isRequired,
-  onClear: PropTypes.func,
   onChange: PropTypes.func,
+  onClear: PropTypes.func,
   title: PropTypes.string.isRequired,
+  value: PropTypes.string,
 };
 
 UserInput.defaultProps = {
   errorMsg: undefined,
-  onClear: () => {},
   onChange: value => logger.info(value),
+  onClear: () => {},
+  value: undefined,
 };
 
 export default UserInput;

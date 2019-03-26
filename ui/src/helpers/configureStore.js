@@ -1,5 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import reducers from 'reducers';
 import throttle from 'lodash/throttle';
@@ -14,8 +15,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 const middlewares =
   process.env.NODE_ENV !== 'production'
-    ? [sagaMiddleware, createLogger({})]
-    : [sagaMiddleware];
+    ? [thunk, sagaMiddleware, createLogger({})]
+    : [thunk, sagaMiddleware];
 
 const configureStore = (initialState = loadState()) => {
   const store = createStore(
