@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-// import fake from './fake';
+import gameConfigReducer from './gameConfigReducer';
 
 export default combineReducers({
-  // fake,
+  gameConfig: gameConfigReducer,
 });
