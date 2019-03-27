@@ -16,3 +16,9 @@ code {
 #game-config-menu {
   min-width: 250px;
 }
+
+.square-button {
+  min-width: 150px;
+  min-height: 150px;
+  font-size: 35pt;
+}

@@ -4,8 +4,15 @@ import {
   getSquareStateByPosition,
   getIsTurnPlayer1,
   getBoardState,
+  getMoveCounter,
 } from 'selectors/gameStatusSelectors';
+import TicTacToe from 'helpers/TicTacToe';
+import { getBoardSize } from 'selectors/gameConfigSelectors';
+import scoreActions from './scoreActions';
 
+const incrementMoveCounter = () => ({
+  type: gameStatusConstants.MOVE_COUNTER_INCREMENT,
+});
 const finishGame = () => ({
   type: gameStatusConstants.GAME_FINISH,
 });
@@ -22,16 +29,35 @@ const setBoardState = state => ({
 });
 const evaluateMove = position => (dispatch, getState) => {
   const state = getState();
+  const currentSquareState = getIsTurnPlayer1(state)
+    ? StatesEnum.X
+    : StatesEnum.O;
+
   if (getSquareStateByPosition(state, position) === StatesEnum.BLANK) {
     const { x, y } = position;
     const newBoardState = getBoardState(state).map((row, i) =>
       row.map((squareState, j) => {
         if (i === x && j === y) {
-          return getIsTurnPlayer1(state) ? StatesEnum.X : StatesEnum.O;
+          return currentSquareState;
         }
         return squareState;
       })
     );
+    const newBoard = { size: getBoardSize(state), state: newBoardState };
+    const ticTacToe = new TicTacToe(newBoard);
+
+    if (ticTacToe.hasYouWon(x, y, currentSquareState)) {
+      dispatch(setWinner(currentSquareState));
+      if (currentSquareState === StatesEnum.X) {
+        dispatch(scoreActions.incrementPlayer1Score());
+      } else {
+        dispatch(scoreActions.incrementPlayer2Score());
+      }
+    } else if (ticTacToe.hasYouTied(getMoveCounter(state) + 1)) {
+      dispatch(finishGame());
+      dispatch(scoreActions.incrementDrawScore());
+    }
+
     dispatch(setBoardState(newBoardState));
   }
 };
@@ -39,6 +65,7 @@ const evaluateMove = position => (dispatch, getState) => {
 const gameStatusActions = {
   evaluateMove,
   finishGame,
+  incrementMoveCounter,
   restartGame,
   setBoardState,
   setWinner,

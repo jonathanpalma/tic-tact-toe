@@ -1,10 +1,24 @@
+import Log from './Log';
+
+const logger = new Log('TicTacToe');
+
 class TicTacToe {
   constructor(board) {
     this.board = board;
     this.done = false;
   }
 
+  hasYouWon(x, y, state) {
+    return (
+      this.hasWonVertical(x, state) ||
+      this.hasWonHorizontal(y, state) ||
+      this.hasWonDiagonal(x, y, state) ||
+      this.hasWonDiagonalInverted(x, y, state)
+    );
+  }
+
   hasWonVertical(x, state) {
+    logger.info(`hasWonVertical(${x}, ${state}) - done(${this.done})`);
     if (this.done) {
       return true;
     }
@@ -19,6 +33,7 @@ class TicTacToe {
   }
 
   hasWonHorizontal(y, state) {
+    logger.info(`hasWonHorizontal(${y}, ${state}) - done(${this.done})`);
     if (this.done) {
       return true;
     }
@@ -33,6 +48,7 @@ class TicTacToe {
   }
 
   hasWonDiagonal(x, y, state) {
+    logger.info(`hasWonDiagonal(${x}, ${y}, ${state}) - done(${this.done})`);
     if (this.done) {
       return true;
     }
@@ -49,6 +65,9 @@ class TicTacToe {
   }
 
   hasWonDiagonalInverted(x, y, state) {
+    logger.info(
+      `hasWonDiagonalInverted(${x}, ${y}, ${state}) - done(${this.done})`
+    );
     if (this.done) {
       return true;
     }
@@ -64,14 +83,14 @@ class TicTacToe {
     return this.done;
   }
 
-  hasTied(moveCounter) {
-    if (this.done) {
+  hasYouTied(moveCounter) {
+    logger.info(
+      `hasYouTied(${moveCounter}) - totalBoardMoves(${this.board.size ** 2})`
+    );
+    if (moveCounter === this.board.size ** 2 && !this.done) {
       return true;
     }
-    if (moveCounter === this.board.size ** 2) {
-      this.done = true;
-    }
-    return this.done;
+    return false;
   }
 }
 

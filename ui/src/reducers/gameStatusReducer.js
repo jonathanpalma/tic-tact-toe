@@ -23,16 +23,18 @@ export default (state = initialState, action) => {
     case gameStatusConstants.BOARD_STATE_SET:
       return {
         ...state,
-        isTurnPlayer1: !state.isTurnPlayer1,
         moveCounter: state.moveCounter + 1,
+        isTurnPlayer1: !state.isTurnPlayer1,
         boardState: payload,
       };
+    case gameStatusConstants.MOVE_COUNTER_INCREMENT:
+      return { ...state, moveCounter: state.moveCounter + 1 };
     case gameStatusConstants.GAME_FINISH:
       return { ...state, hasFinished: true };
     case gameStatusConstants.GAME_RESTART:
       return { ...initialState };
     case gameStatusConstants.WINNER_SET:
-      return { ...state, winner: payload };
+      return { ...state, hasFinished: true, winner: payload };
     default:
       return state;
   }

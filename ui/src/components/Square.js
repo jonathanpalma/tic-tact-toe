@@ -5,7 +5,13 @@ import { StatesEnum, EmojisEnum } from 'constants/constants';
 
 const Square = ({ onClick, value, ...rest }) => {
   return (
-    <Button type="button" variant="light" onClick={onClick} {...rest}>
+    <Button
+      className="square-button"
+      type="button"
+      variant="light"
+      onClick={onClick}
+      {...rest}
+    >
       <span>{value === StatesEnum.BLANK ? '' : EmojisEnum[value]}</span>
     </Button>
   );
