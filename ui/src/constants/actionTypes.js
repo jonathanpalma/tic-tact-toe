@@ -10,6 +10,13 @@ export const gameConfigConstants = {
   PLAYER_2_SET: 'PLAYER_2_SET',
 };
 
+export const gameStatusConstants = {
+  TURN_NEXT: 'TURN_NEXT',
+  GAME_FINISH: 'GAME_FINISH',
+  GAME_RESTART: 'GAME_RESTART',
+  WINNER_SET: 'WINNER_SET',
+};
+
 export const helpConstants = {
   HELP_MODAL_SET: 'HELP_MODAL_SET',
 };
