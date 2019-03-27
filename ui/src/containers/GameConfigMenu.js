@@ -12,6 +12,7 @@ import {
   getPlayer2ErrorMsg,
   getPlayer2Id,
 } from 'selectors/gameConfigSelectors';
+import Button from 'react-bootstrap/Button';
 
 const GameConfigMenu = memo(
   ({
@@ -55,14 +56,14 @@ const GameConfigMenu = memo(
           value={player2Id}
         />
         <br />
-        <BoardSizeInput isDisabled onChange={setBoardSize} value={boardSize} />
+        <BoardSizeInput onChange={setBoardSize} value={boardSize} />
         <br />
-        <button type="button" disabled={!isValidConfig()} onClick={handleStart}>
+        <Button type="button" disabled={!isValidConfig()} onClick={handleStart}>
           Start
-        </button>
-        <button type="button" onClick={clearGameConfig}>
+        </Button>
+        <Button type="button" variant="light" onClick={clearGameConfig}>
           Clear
-        </button>
+        </Button>
       </div>
     );
   }

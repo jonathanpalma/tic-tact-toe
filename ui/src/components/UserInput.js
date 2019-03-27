@@ -4,6 +4,7 @@ import AsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import debounce from 'debounce-promise';
 import Log from 'helpers/Log';
 import userService from 'services/userService';
+import Alert from 'react-bootstrap/Alert';
 
 const logger = new Log('UserInput');
 
@@ -52,9 +53,7 @@ const UserInput = memo(
           value={{ label: value, value }}
           {...rest}
         />
-        {errorMsg && (
-          <div className="alert alert-danger">{`Error: ${errorMsg}`}</div>
-        )}
+        {errorMsg && <Alert variant="danger">{`Error: ${errorMsg}`}</Alert>}
       </div>
     );
   }

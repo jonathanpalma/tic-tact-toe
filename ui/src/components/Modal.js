@@ -1,6 +1,7 @@
 import React, { Fragment, memo } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import Button from 'react-bootstrap/Button';
 
 const customStyles = {
   content: {
@@ -16,9 +17,9 @@ const customStyles = {
 const Modal = memo(
   ({ children, openBtnLabel, openModal, closeModal, ...rest }) => (
     <Fragment>
-      <button type="button" onClick={openModal}>
+      <Button type="button" variant="light" onClick={openModal}>
         {openBtnLabel}
-      </button>
+      </Button>
       <ReactModal ariaHideApp={false} style={customStyles} {...rest}>
         <Fragment>
           {children}

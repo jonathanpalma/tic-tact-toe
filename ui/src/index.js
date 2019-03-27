@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import App from 'components/App';
 import Root from 'components/Root';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 import * as serviceWorker from 'helpers/serviceWorker';
