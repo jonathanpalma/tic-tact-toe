@@ -3,8 +3,9 @@ import { gameStatusConstants } from 'constants/actionTypes';
 const finishGame = () => ({
   type: gameStatusConstants.GAME_FINISH,
 });
-const nextTurn = () => ({
-  type: gameStatusConstants.TURN_NEXT,
+const moveGame = position => ({
+  type: gameStatusConstants.GAME_MOVE,
+  payload: position,
 });
 const restartGame = () => ({
   type: gameStatusConstants.GAME_RESTART,
@@ -16,7 +17,7 @@ const setWinner = player => ({
 
 const gameStatusActions = {
   finishGame,
-  nextTurn,
+  moveGame,
   restartGame,
   setWinner,
 };
