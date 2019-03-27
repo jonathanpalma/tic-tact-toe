@@ -1,6 +1,6 @@
 import { scoreConstants } from 'constants/actionTypes';
 
-const initialState = {
+export const initialState = {
   draw: 0,
   player1: 0,
   player2: 0,

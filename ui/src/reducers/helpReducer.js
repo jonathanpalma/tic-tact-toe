@@ -1,6 +1,6 @@
 import { helpConstants } from 'constants/actionTypes';
 
-const initialState = {
+export const initialState = {
   isModalOpen: false,
 };
 

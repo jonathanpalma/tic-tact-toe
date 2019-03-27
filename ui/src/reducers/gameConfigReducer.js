@@ -1,12 +1,12 @@
 import { gameConfigConstants } from 'constants/actionTypes';
 import isNumber from 'lodash/isNumber';
 
-const initialPlayerState = {
+export const initialPlayerState = {
   id: undefined,
   errorMsg: undefined,
 };
 
-const initialState = {
+export const initialState = {
   player1: initialPlayerState,
   player2: initialPlayerState,
   boardSize: 3,
