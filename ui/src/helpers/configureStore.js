@@ -29,7 +29,10 @@ const configureStore = (initialState = loadState()) => {
 
   store.subscribe(
     throttle(() => {
-      saveState(store.getState());
+      const state = store.getState();
+      saveState({
+        gameConfig: state.gameConfig,
+      });
     }),
     1000
   );

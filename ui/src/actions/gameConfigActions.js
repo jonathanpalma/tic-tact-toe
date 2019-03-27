@@ -1,5 +1,6 @@
 import { gameConfigConstants } from 'constants/actionTypes';
 import { getPlayer1Id, getPlayer2Id } from 'selectors/gameConfigSelectors';
+import { ERROR_PLAYER_DUPLICATED } from 'constants/messages';
 
 const clearGameConfig = () => ({
   type: gameConfigConstants.GAME_CONFIG_CLEAR,
@@ -36,14 +37,14 @@ const setPlayer1 = id => (dispatch, getState) => {
   if (id !== getPlayer2Id(getState())) {
     dispatch(setPlayer1Id(id));
   } else {
-    dispatch(setPlayer1Error('Debes seleccionar un usuario diferente'));
+    dispatch(setPlayer1Error(ERROR_PLAYER_DUPLICATED));
   }
 };
 const setPlayer2 = id => (dispatch, getState) => {
   if (id !== getPlayer1Id(getState())) {
     dispatch(setPlayer2Id(id));
   } else {
-    dispatch(setPlayer2Error('Debes seleccionar un usuario diferente'));
+    dispatch(setPlayer2Error(ERROR_PLAYER_DUPLICATED));
   }
 };
 
