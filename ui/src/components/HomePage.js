@@ -1,6 +1,10 @@
-import React from 'react';
-import GameConfigMenu from 'containers/GameConfigMenu';
+import React, { Fragment } from 'react';
+import GameConfigModal from 'containers/GameConfigModal';
 
-const HomePage = () => <GameConfigMenu />;
+const HomePage = () => (
+  <Fragment>
+    <GameConfigModal />
+  </Fragment>
+);
 
 export default HomePage;

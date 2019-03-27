@@ -17,6 +17,7 @@ const GameConfigMenu = memo(
     clearGameConfig,
     clearPlayer1,
     clearPlayer2,
+    onStart,
     player1ErrorMsg,
     player1Id,
     player2ErrorMsg,
@@ -24,34 +25,49 @@ const GameConfigMenu = memo(
     setBoardSize,
     setPlayer1,
     setPlayer2,
-  }) => (
-    <div id="game-config-menu">
-      <UserInput
-        errorMsg={player1ErrorMsg}
-        name="player1"
-        onChange={setPlayer1}
-        onClear={clearPlayer1}
-        title="Player 1"
-        value={player1Id}
-      />
-      <br />
-      <UserInput
-        errorMsg={player2ErrorMsg}
-        name="player2"
-        onChange={setPlayer2}
-        onClear={clearPlayer2}
-        title="Player 2"
-        value={player2Id}
-      />
-      <br />
-      <input type="number" value={boardSize} disabled onChange={setBoardSize} />
-      <br />
-      <button type="button">Start</button>
-      <button type="button" onClick={clearGameConfig}>
-        Clear
-      </button>
-    </div>
-  )
+  }) => {
+    const isValidConfig = () => Boolean(player1Id && player2Id && boardSize);
+    const handleStart = () => {
+      if (isValidConfig()) {
+        onStart();
+      }
+    };
+    return (
+      <div id="game-config-menu">
+        <UserInput
+          errorMsg={player1ErrorMsg}
+          name="player1"
+          onChange={setPlayer1}
+          onClear={clearPlayer1}
+          title="Player 1"
+          value={player1Id}
+        />
+        <br />
+        <UserInput
+          errorMsg={player2ErrorMsg}
+          name="player2"
+          onChange={setPlayer2}
+          onClear={clearPlayer2}
+          title="Player 2"
+          value={player2Id}
+        />
+        <br />
+        <input
+          disabled
+          onChange={setBoardSize}
+          type="number"
+          value={boardSize}
+        />
+        <br />
+        <button type="button" disabled={!isValidConfig()} onClick={handleStart}>
+          Start
+        </button>
+        <button type="button" onClick={clearGameConfig}>
+          Clear
+        </button>
+      </div>
+    );
+  }
 );
 
 GameConfigMenu.propTypes = {
@@ -59,6 +75,7 @@ GameConfigMenu.propTypes = {
   clearGameConfig: PropTypes.func.isRequired,
   clearPlayer1: PropTypes.func.isRequired,
   clearPlayer2: PropTypes.func.isRequired,
+  onStart: PropTypes.func,
   player1ErrorMsg: PropTypes.string,
   player1Id: PropTypes.string,
   player2ErrorMsg: PropTypes.string,
@@ -69,6 +86,7 @@ GameConfigMenu.propTypes = {
 };
 
 GameConfigMenu.defaultProps = {
+  onStart: () => {},
   player1ErrorMsg: undefined,
   player1Id: undefined,
   player2ErrorMsg: undefined,

@@ -11,6 +11,10 @@ const clearPlayer1 = () => ({
 const clearPlayer2 = () => ({
   type: gameConfigConstants.PLAYER_2_CLEAR,
 });
+const setIsModalOpen = bool => ({
+  type: gameConfigConstants.GAME_CONFIG_MODAL_SET,
+  payload: bool,
+});
 const setPlayer1Error = err => ({
   type: gameConfigConstants.PLAYER_1_ERROR,
   payload: err,
@@ -53,6 +57,7 @@ const gameConfigActions = {
   clearPlayer1,
   clearPlayer2,
   setBoardSize,
+  setIsModalOpen,
   setPlayer1,
   setPlayer1Error,
   setPlayer2,

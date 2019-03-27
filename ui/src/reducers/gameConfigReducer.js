@@ -10,6 +10,7 @@ const initialState = {
   player1: initialPlayerState,
   player2: initialPlayerState,
   boardSize: 3,
+  isModalOpen: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,7 +21,9 @@ export default (state = initialState, action) => {
         ? { ...state, boardSize: Number(payload) }
         : state;
     case gameConfigConstants.GAME_CONFIG_CLEAR:
-      return { ...initialState };
+      return { ...initialState, isModalOpen: state.isModalOpen };
+    case gameConfigConstants.GAME_CONFIG_MODAL_SET:
+      return { ...state, isModalOpen: payload };
     case gameConfigConstants.PLAYER_1_CLEAR:
       return { ...state, player1: initialPlayerState };
     case gameConfigConstants.PLAYER_1_ERROR:

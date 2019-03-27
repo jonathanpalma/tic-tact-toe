@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from 'components/Navbar';
 
 const App = ({ children }) => (
-  <React.Fragment>
+  <Fragment>
     <Navbar />
     {children}
-  </React.Fragment>
+  </Fragment>
 );
 
 App.propTypes = {

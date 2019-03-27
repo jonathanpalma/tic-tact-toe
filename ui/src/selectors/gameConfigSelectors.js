@@ -1,4 +1,5 @@
 export const getBoardSize = state => state.gameConfig.boardSize;
+export const getIsModalOpen = state => Boolean(state.gameConfig.isModalOpen);
 export const getPlayer1Id = state => state.gameConfig.player1.id || '';
 export const getPlayer1ErrorMsg = state => state.gameConfig.player1.errorMsg;
 export const getPlayer1HasErrored = state =>
