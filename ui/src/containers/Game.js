@@ -9,7 +9,7 @@ import {
   getPlayer1Score,
   getPlayer2Score,
 } from 'selectors/scoreSelectors';
-import Board from 'components/Board';
+import Board from 'containers/Board';
 
 const Game = memo(({ draw, player1, player2 }) => (
   <div className="game-container">
