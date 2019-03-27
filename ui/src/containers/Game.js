@@ -1,28 +1,51 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPlayer1Id, getPlayer2Id } from 'selectors/gameConfigSelectors';
 import PlayerInfo from 'components/PlayerInfo';
 import Score from 'components/Score';
+import { getPlayer1Id, getPlayer2Id } from 'selectors/gameConfigSelectors';
+import {
+  getDrawScore,
+  getPlayer1Score,
+  getPlayer2Score,
+} from 'selectors/scoreSelectors';
 
-const Game = memo(({ player1Id, player2Id }) => (
+const Game = memo(({ draw, player1, player2 }) => (
   <div className="game-container">
     <div className="player-info-container">
-      <PlayerInfo number={1} username={player1Id} />
-      <PlayerInfo number={2} username={player2Id} />
+      <PlayerInfo number={1} username={player1.id} />
+      <PlayerInfo number={2} username={player2.id} />
     </div>
-    <Score />
+    <Score draw={draw.score} player1={player1.score} player2={player2.score} />
   </div>
 ));
 
 Game.propTypes = {
-  player1Id: PropTypes.string.isRequired,
-  player2Id: PropTypes.string.isRequired,
+  draw: PropTypes.shape({
+    score: PropTypes.number.isRequired,
+  }).isRequired,
+  player1: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
+  }).isRequired,
+  player2: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
-  player1Id: getPlayer1Id(state),
-  player2Id: getPlayer2Id(state),
+  player1: {
+    id: getPlayer1Id(state),
+    score: getPlayer1Score(state),
+  },
+  player2: {
+    id: getPlayer2Id(state),
+    score: getPlayer2Score(state),
+  },
+  draw: {
+    score: getDrawScore(state),
+  },
 });
 
 const mapDispatchToProps = dispatch => ({});

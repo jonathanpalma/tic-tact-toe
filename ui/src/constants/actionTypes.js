@@ -13,3 +13,9 @@ export const gameConfigConstants = {
 export const helpConstants = {
   HELP_MODAL_SET: 'HELP_MODAL_SET',
 };
+
+export const scoreConstants = {
+  SCORE_DRAW_INCREMENT: 'SCORE_DRAW_INCREMENT',
+  SCORE_PLAYER_1_INCREMENT: 'SCORE_PLAYER_1_INCREMENT',
+  SCORE_PLAYER_2_INCREMENT: 'SCORE_PLAYER_2_INCREMENT',
+};
