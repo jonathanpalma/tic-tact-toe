@@ -20,7 +20,6 @@ class Board extends PureComponent {
           <Square
             key={`${x}-${y}`}
             onClick={() => moveGame({ x, y })}
-            position={{ x, y }}
             disabled={squareState !== StatesEnum.BLANK}
             value={squareState}
           />
@@ -48,7 +47,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  moveGame: position => dispatch(gameStatusActions.moveGame(position)),
+  moveGame: position => dispatch(gameStatusActions.evaluateMove(position)),
 });
 
 export default connect(

@@ -11,7 +11,7 @@ export const gameConfigConstants = {
 };
 
 export const gameStatusConstants = {
-  GAME_MOVE: 'GAME_MOVE',
+  BOARD_STATE_SET: 'BOARD_STATE_SET',
   GAME_FINISH: 'GAME_FINISH',
   GAME_RESTART: 'GAME_RESTART',
   WINNER_SET: 'WINNER_SET',

@@ -36,7 +36,7 @@ const connectMongoose = () => {
     mongoose.connect(keys.mongoURI, mongooseOptions).then(
       () => {},
       err => {
-        logger.error(`${connectionRetries} - Mongodb connection rejected. Retrying in 5 sec.`, err);
+        logger.error(`${connectionRetries} - Mongodb connection rejected at ${keys.mongoURI}. Retrying in 5 sec.`, err);
         connectionRetries += 1;
         mongoose.disconnect();
         reconnectionTimeout = setTimeout(connectMongoose, 5000);
