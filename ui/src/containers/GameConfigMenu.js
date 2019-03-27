@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import BoardSizeInput from 'components/BoardSizeInput';
 import UserInput from 'components/UserInput';
 import gameConfigActions from 'actions/gameConfigActions';
 import {
@@ -52,12 +53,7 @@ const GameConfigMenu = memo(
           value={player2Id}
         />
         <br />
-        <input
-          disabled
-          onChange={setBoardSize}
-          type="number"
-          value={boardSize}
-        />
+        <BoardSizeInput isDisabled onChange={setBoardSize} value={boardSize} />
         <br />
         <button type="button" disabled={!isValidConfig()} onClick={handleStart}>
           Start

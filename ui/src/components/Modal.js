@@ -19,7 +19,7 @@ const Modal = memo(
       <button type="button" onClick={openModal}>
         {openBtnLabel}
       </button>
-      <ReactModal style={customStyles} {...rest}>
+      <ReactModal ariaHideApp={false} style={customStyles} {...rest}>
         <Fragment>
           {children}
           {closeModal && (

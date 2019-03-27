@@ -8,7 +8,7 @@ import userService from 'services/userService';
 const logger = new Log('UserInput');
 
 const UserInput = memo(
-  ({ errorMsg, name, onChange, onClear, title, value }) => {
+  ({ errorMsg, name, onChange, onClear, title, value, ...rest }) => {
     const getOptions = async input => {
       if (!input || input.length < 3) {
         return [];
@@ -50,6 +50,7 @@ const UserInput = memo(
           name={`userInput-${name}`}
           onChange={debounce(handleChange, 300)}
           value={{ label: value, value }}
+          {...rest}
         />
         {errorMsg && (
           <div className="alert alert-danger">{`Error: ${errorMsg}`}</div>
