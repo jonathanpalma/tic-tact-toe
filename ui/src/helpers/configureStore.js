@@ -32,6 +32,7 @@ const configureStore = (initialState = loadState()) => {
       const state = store.getState();
       saveState({
         gameConfig: state.gameConfig,
+        gameStatus: state.gameStatus,
         score: state.score,
       });
     }),
