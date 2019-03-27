@@ -1,4 +1,4 @@
-import { scoreConstants } from 'constants/actionTypes';
+import { gameConfigConstants, scoreConstants } from 'constants/actionTypes';
 
 export const initialState = {
   draw: 0,
@@ -8,6 +8,15 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case gameConfigConstants.BOARD_SIZE_SET:
+    case gameConfigConstants.GAME_CONFIG_CLEAR:
+    case gameConfigConstants.PLAYER_1_CLEAR:
+    case gameConfigConstants.PLAYER_1_ERROR:
+    case gameConfigConstants.PLAYER_1_SET:
+    case gameConfigConstants.PLAYER_2_CLEAR:
+    case gameConfigConstants.PLAYER_2_ERROR:
+    case gameConfigConstants.PLAYER_2_SET:
+      return { ...initialState };
     case scoreConstants.SCORE_DRAW_INCREMENT:
       return { ...state, draw: state.draw + 1 };
     case scoreConstants.SCORE_PLAYER_1_INCREMENT:
