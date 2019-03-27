@@ -14,6 +14,7 @@ import {
 const GameConfigMenu = memo(
   ({
     boardSize,
+    clearGameConfig,
     clearPlayer1,
     clearPlayer2,
     player1ErrorMsg,
@@ -46,12 +47,16 @@ const GameConfigMenu = memo(
       <input type="number" value={boardSize} disabled onChange={setBoardSize} />
       <br />
       <button type="button">Start</button>
+      <button type="button" onClick={clearGameConfig}>
+        Clear
+      </button>
     </div>
   )
 );
 
 GameConfigMenu.propTypes = {
   boardSize: PropTypes.number.isRequired,
+  clearGameConfig: PropTypes.func.isRequired,
   clearPlayer1: PropTypes.func.isRequired,
   clearPlayer2: PropTypes.func.isRequired,
   player1ErrorMsg: PropTypes.string,
@@ -79,6 +84,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  clearGameConfig: () => dispatch(gameConfigActions.clearGameConfig()),
   clearPlayer1: () => dispatch(gameConfigActions.clearPlayer1()),
   clearPlayer2: () => dispatch(gameConfigActions.clearPlayer2()),
   setBoardSize: size => dispatch(gameConfigActions.setBoardSize(size)),
