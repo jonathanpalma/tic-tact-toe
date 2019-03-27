@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import App from 'components/App';
-import HomePage from 'components/HomePage';
-import NotFound from 'components/NotFound';
-import RankingPage from 'components/RankingPage';
 import Root from 'components/Root';
 import './index.css';
 
 import * as serviceWorker from 'helpers/serviceWorker';
+
+// Implementing async router using lazy and Suspense.
+// In this way, the initial JS bundle will be super small and
+// it would worry about pulling the real content after-the-fact
+// while is displaying a loading message as a fallback.
+const HomePage = lazy(() => import('components/HomePage'));
+const NotFound = lazy(() => import('components/NotFound'));
+const RankingPage = lazy(() => import('components/RankingPage'));
+
+// At this moment lazy and Suspense are not yet available for
+// server-side rendering. If you need it, go back to the sync way...
+// import HomePage from 'components/HomePage';
+// import NotFound from 'components/NotFound';
+// import RankingPage from 'components/RankingPage';
 
 const { NODE_ENV, REACT_APP_NAME } = process.env;
 if (NODE_ENV !== 'production') {
@@ -20,11 +31,13 @@ ReactDOM.render(
   <Root>
     <Router>
       <App>
-        <Switch>
-          <Route path="/ranking" component={RankingPage} />
-          <Route path="/" exact component={HomePage} />
-          <Route path="*" component={NotFound} status={404} />
-        </Switch>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route path="/ranking" component={RankingPage} />
+            <Route path="/" exact component={HomePage} />
+            <Route path="*" component={NotFound} status={404} />
+          </Switch>
+        </Suspense>
       </App>
     </Router>
   </Root>,
