@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import BoardSizeInput from 'components/BoardSizeInput';
 import UserInput from 'components/UserInput';
 import gameConfigActions from 'actions/gameConfigActions';
+import { isValidGameConfig } from 'helpers/validators';
 import {
   getBoardSize,
   getPlayer1ErrorMsg,
@@ -27,7 +28,8 @@ const GameConfigMenu = memo(
     setPlayer1,
     setPlayer2,
   }) => {
-    const isValidConfig = () => Boolean(player1Id && player2Id && boardSize);
+    const isValidConfig = () =>
+      isValidGameConfig(player1Id, player2Id, boardSize);
     const handleStart = () => {
       if (isValidConfig()) {
         onStart();

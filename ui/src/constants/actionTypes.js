@@ -9,3 +9,7 @@ export const gameConfigConstants = {
   PLAYER_2_ERROR: 'PLAYER_2_ERROR',
   PLAYER_2_SET: 'PLAYER_2_SET',
 };
+
+export const helpConstants = {
+  HELP_MODAL_SET: 'HELP_MODAL_SET',
+};

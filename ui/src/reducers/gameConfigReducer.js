@@ -10,7 +10,7 @@ const initialState = {
   player1: initialPlayerState,
   player2: initialPlayerState,
   boardSize: 3,
-  isModalOpen: false,
+  isModalOpen: true,
 };
 
 export default (state = initialState, action) => {
