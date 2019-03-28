@@ -17,12 +17,12 @@ const Instruction = memo(({ boardSize }) => (
         empty squares.
       </li>
       <li>
-        The first player to get 3 of her marks in a row (up, down, across, or
-        diagonally) is the winner.
+        The first player to get {boardSize} of her marks in a row (up, down,
+        across, or diagonally) is the winner.
       </li>
       <li>
         When all {boardSize * boardSize} squares are full, the game is over. If
-        no player has 3 marks in a row, the game ends in a tie.
+        no player has {boardSize} marks in a row, the game ends in a tie.
       </li>
     </ol>
   </div>
