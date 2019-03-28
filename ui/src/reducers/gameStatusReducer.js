@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
     case gameStatusConstants.GAME_FINISH:
       return { ...state, hasFinished: true };
     case gameStatusConstants.GAME_RESTART:
-      return { ...initialState };
+      return { ...initialState, boardState: genStateMatrix(payload) };
     case gameStatusConstants.WINNER_SET:
       return { ...state, hasFinished: true, winner: payload };
     default:

@@ -16,9 +16,11 @@ const incrementMoveCounter = () => ({
 const finishGame = () => ({
   type: gameStatusConstants.GAME_FINISH,
 });
-const restartGame = () => ({
-  type: gameStatusConstants.GAME_RESTART,
-});
+const restartGame = () => (dispatch, getState) =>
+  dispatch({
+    type: gameStatusConstants.GAME_RESTART,
+    payload: getBoardSize(getState()),
+  });
 const setWinner = player => ({
   type: gameStatusConstants.WINNER_SET,
   payload: player,
