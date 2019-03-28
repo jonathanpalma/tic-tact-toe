@@ -3,40 +3,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import PlayerInfo from 'components/PlayerInfo';
 import Score from 'components/Score';
-import { getPlayer1Id, getPlayer2Id } from 'selectors/gameConfigSelectors';
+import {
+  getPlayer1Id,
+  getPlayer2Id,
+  getBoardSize,
+} from 'selectors/gameConfigSelectors';
 import {
   getDrawScore,
   getPlayer1Score,
   getPlayer2Score,
 } from 'selectors/scoreSelectors';
 import Board from 'containers/Board';
-import Button from 'react-bootstrap/Button';
 import gameStatusActions from 'actions/gameStatusActions';
 import { getHasFinished, getWinner } from 'selectors/gameStatusSelectors';
+import Avatar from 'components/Avatar';
+import { containerSize } from 'helpers/dynamicStyles';
 
-const Game = ({ draw, player1, player2, hasFinished, restartGame, winner }) => (
-  <div className="game-container">
+const Game = ({
+  boardSize,
+  draw,
+  player1,
+  player2,
+  hasFinished,
+  restartGame,
+  winner,
+}) => (
+  <div className="board-container">
     {!hasFinished ? (
       <Board />
     ) : winner ? (
-      <div>Player {winner} has won</div>
+      <div
+        className="game-message"
+        style={{ height: containerSize(boardSize) }}
+      >
+        <Avatar player={winner} />
+        Player {winner} has won
+      </div>
     ) : (
-      <div>draw</div>
+      <div
+        className="game-message"
+        style={{ height: containerSize(boardSize) }}
+      >
+        Draw
+      </div>
     )}
-    <Button type="button" variant="light" onClick={restartGame}>
+    <button
+      className="restart-button"
+      type="button"
+      variant="light"
+      onClick={restartGame}
+    >
       Restart
-    </Button>
-    <div className="player-info-container">
-      <PlayerInfo number={1} username={player1.id} />
-      <PlayerInfo number={2} username={player2.id} />
-    </div>
-    <Score draw={draw.score} player1={player1.score} player2={player2.score} />
+    </button>
+    <Score draw={draw.score} player1={player1} player2={player2} />
   </div>
 );
 
 Game.propTypes = {
+  boardSize: PropTypes.number.isRequired,
   draw: PropTypes.shape({
     score: PropTypes.number.isRequired,
   }).isRequired,
@@ -58,6 +83,7 @@ Game.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  boardSize: getBoardSize(state),
   player1: {
     id: getPlayer1Id(state),
     score: getPlayer1Score(state),

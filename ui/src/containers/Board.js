@@ -7,11 +7,12 @@ import { getBoardSize } from 'selectors/gameConfigSelectors';
 import { getBoardState } from 'selectors/gameStatusSelectors';
 import Square from 'components/Square';
 import { StatesEnum } from 'constants/constants';
+import { squareSize } from 'helpers/dynamicStyles';
 
 class Board extends PureComponent {
   render() {
     const {
-      board: { state: boardState },
+      board: { size: boardSize, state: boardState },
       moveGame,
     } = this.props;
     return boardState.map((row, x) => (
@@ -22,6 +23,10 @@ class Board extends PureComponent {
             onClick={() => moveGame({ x, y })}
             disabled={squareState !== StatesEnum.BLANK}
             value={squareState}
+            style={{
+              minHeight: squareSize(boardSize),
+              minWidth: squareSize(boardSize),
+            }}
           />
         ))}
       </div>

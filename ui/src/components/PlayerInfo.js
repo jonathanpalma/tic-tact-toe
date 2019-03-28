@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import Avatar from './Avatar';
 
 const PlayerInfo = memo(({ number, username }) => (
   <div className="player-info-item">
     <p>
-      {number === 1 ? 'X' : 'O'}
       <span>{username}</span>
+      <Avatar player={number} />
     </p>
   </div>
 ));

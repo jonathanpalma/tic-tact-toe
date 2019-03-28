@@ -13,12 +13,32 @@ code {
     monospace;
 }
 
+.p-2 {
+  padding: 0 !important;
+}
 #game-config-menu {
   min-width: 250px;
 }
-
+#app-container {
+  text-align: center;
+}
+#game-container {
+  margin: auto;
+  background-color: lightgray;
+}
+.avatar {
+  display: block;
+  font-size: 30pt;
+}
+.game-message {
+  padding-top: 45%;
+}
+.restart-button {
+  width: 100%;
+}
+.top-options {
+  width: 100%;
+}
 .square-button {
-  min-width: 150px;
-  min-height: 150px;
-  font-size: 35pt;
+  font-size: 30pt;
 }

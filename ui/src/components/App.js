@@ -5,7 +5,7 @@ import Navbar from 'components/Navbar';
 const App = ({ children }) => (
   <Fragment>
     <Navbar />
-    {children}
+    <div id="app-container">{children}</div>
   </Fragment>
 );
 
