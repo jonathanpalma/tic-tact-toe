@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import AsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
+import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'debounce-promise';
 import Log from 'helpers/Log';
 import userService from 'services/userService';
